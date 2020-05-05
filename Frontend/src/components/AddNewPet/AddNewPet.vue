@@ -6,66 +6,66 @@
             <div class="col-md-6">
                 <Errormessage v-if="errorobj" :errorobj="errorobj"></Errormessage>
                 <b-overlay :show="breedlistdata.length < 1" rounded="sm">
-                <b-card header="Pet Details">
-                    <b-form v-if="show" @submit="onSubmit" @reset="onReset">
-                        <div class="row">
-                            <div class="col">
-                                <b-form-group
-                                        id="input-group-1"
-                                        label="Pet Category:"
-                                        label-for="input-1">
-                                    <b-form-select
-                                            id="input-1"
-                                            v-model="form.category"
-                                            required
-                                            :options="petcategoryOptions"
-                                            placeholder="Select Category"
-                                    ></b-form-select>
-                                </b-form-group>
+                    <b-card header="Pet Details">
+                        <b-form v-if="show" @submit="onSubmit" @reset="onReset">
+                            <div class="row">
+                                <div class="col">
+                                    <b-form-group
+                                            id="input-group-1"
+                                            label="Pet Category:"
+                                            label-for="input-1">
+                                        <b-form-select
+                                                id="input-1"
+                                                v-model="form.category"
+                                                required
+                                                :options="petcategoryOptions"
+                                                placeholder="Select Category"
+                                        ></b-form-select>
+                                    </b-form-group>
+                                </div>
+                                <div class="col">
+                                    <b-form-group
+                                            label="Breed:"
+                                            label-for="breedid">
+                                        <b-form-select
+                                                id="breedid"
+                                                v-model="form.breed"
+                                                required
+                                                :options="breedOptions"
+                                                placeholder="Select Category"
+                                        ></b-form-select>
+                                    </b-form-group>
+                                </div>
                             </div>
-                            <div class="col">
-                                <b-form-group
-                                        label="Breed:"
-                                        label-for="breedid">
-                                    <b-form-select
-                                            id="breedid"
-                                            v-model="form.breed"
+                            <div>
+                                <b-form-group id="input-group-2" label="Pet Name:" label-for="input-2">
+                                    <b-form-input
+                                            id="input-2"
+                                            v-model="form.name"
                                             required
-                                            :options="breedOptions"
-                                            placeholder="Select Category"
-                                    ></b-form-select>
+                                            placeholder="Enter Pet name"
+                                    ></b-form-input>
                                 </b-form-group>
-                            </div>
-                        </div>
-                        <div>
-                            <b-form-group id="input-group-2" label="Pet Name:" label-for="input-2">
-                                <b-form-input
-                                        id="input-2"
-                                        v-model="form.name"
-                                        required
-                                        placeholder="Enter Pet name"
-                                ></b-form-input>
-                            </b-form-group>
-                            <b-form-group label="Instructions for handling your Pet:" label-for="instructions">
-                                <b-form-input
-                                        id="instructions"
-                                        v-model="form.instructions"
-                                        required
-                                        placeholder="Pet Instructions"
-                                ></b-form-input>
-                            </b-form-group>
+                                <b-form-group label="Instructions for handling your Pet:" label-for="instructions">
+                                    <b-form-input
+                                            id="instructions"
+                                            v-model="form.instructions"
+                                            required
+                                            placeholder="Pet Instructions"
+                                    ></b-form-input>
+                                </b-form-group>
 
-                            <b-form-group label="Date of Birth(Approximate):" label-for="instructions">
-                                <v-date-picker
-                                        :max-date='new Date()'
-                                        v-model="rawDob"
-                                        is-inline/>
-                            </b-form-group>
-                            <b-button type="submit" variant="primary" class="mx-1">Submit</b-button>
-                            <b-button type="reset" variant="danger" class="mx-1">Reset</b-button>
-                        </div>
-                    </b-form>
-                </b-card>
+                                <b-form-group label="Date of Birth(Approximate):" label-for="instructions">
+                                    <v-date-picker
+                                            :max-date='new Date()'
+                                            v-model="rawDob"
+                                            is-inline/>
+                                </b-form-group>
+                                <b-button type="submit" variant="primary" class="mx-1">Submit</b-button>
+                                <b-button type="reset" variant="danger" class="mx-1">Reset</b-button>
+                            </div>
+                        </b-form>
+                    </b-card>
                 </b-overlay>
             </div>
         </div>
@@ -98,7 +98,8 @@
                 breedlistdata: undefined,
                 // for options of breed select/dropdown in form.
                 breedOptions: undefined,
-                errorobj: false
+                errorobj: false,
+                loading: false
             }
         },
         created() {
@@ -128,13 +129,14 @@
                 event.preventDefault();
                 this.errorobj = false;
                 if (this.rawDob instanceof Date) {
+                    this.loading = true
                     // send post request
                     axios.post(userpets, {...this.form})
                         .then(() => {
                             this.$bvModal.msgBoxOk("Pet Details added.").then(() => {
                                 this.$router.push({name: "userpets"})
                             })
-                        })
+                        }).then(() => this.loading = false)
                 } else {
                     this.errorobj = {"Date": "Select a valid Date."}
                 }
