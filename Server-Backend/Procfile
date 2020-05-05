@@ -1,0 +1,2 @@
+
+web: gunicorn djangoforstays.wsgi --log-file -
