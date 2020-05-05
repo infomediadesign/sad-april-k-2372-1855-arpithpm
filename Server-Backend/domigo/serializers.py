@@ -186,7 +186,12 @@ class UserBookingsListSerializer(serializers.ModelSerializer):
         return obj.booked_by.first_name.title()
 
     def get_pet(self, obj):
-        return obj.userpet.name.title()
+        try:
+            pet_name = obj.userpet.name.title()
+        except:
+            return "No Detail"
+        else:
+            return pet_name
 
     def get_payment_done(self, obj):
         try:

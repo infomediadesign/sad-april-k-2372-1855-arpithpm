@@ -14,7 +14,7 @@
                         <b-col>
                             <b-overlay :show="isloading" rounded="sm">
                                 <b-card header="Select your pet" :border-variant="selectedpet ? 'success': 'secondary'">
-                                <b-alert :show="!pets.length" variant="danger" >No Pets found. Add a Pet to make a Booking.</b-alert>
+                                <b-alert :show="!pets.length" variant="danger" >No Pets found. <b-link :to="{name: 'addnewpet'}">Add a Pet</b-link> to make a Booking.</b-alert>
                                     <b-list-group>
                                         <b-list-group-item v-for="(val) in pets" href="#" :key="val.id"
                                                            :active="val.id === selectedpet" @click="setSelectedPet(val)"

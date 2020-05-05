@@ -35,7 +35,7 @@
                                     ></b-form-input>
                                 </b-form-group>
 
-                                <b-form-group id="input-group-3" label="First Name:" label-for="input-3">
+                                <b-form-group id="input-group-3" label="Last Name:" label-for="input-3">
                                     <b-form-input
                                             id="input-3"
                                             v-model="form.last_name"
@@ -146,7 +146,7 @@
                             // console.log("The request was made but no response was received, `err.request` is an instance of XMLHttpRequest in the browser and an instance of http.ClientRequest in Node.js");
                             // console.log(err.request);
                         }
-                    }).finally(() => {
+                    }).then(() => {
                     this.loading = false;
 
                 })

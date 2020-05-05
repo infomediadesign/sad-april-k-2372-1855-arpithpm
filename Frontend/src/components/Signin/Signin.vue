@@ -71,8 +71,8 @@
     export default {
         data() {
             return {
-                email: "",
-                password: "",
+                email: "dummy@email.com",
+                password: "demouserD1@",
                 isloading: false,
                 errors: false,
                 err_messages: {}
