@@ -1,6 +1,6 @@
 <template>
     <div class="mt-2">
-        <h4>Payments</h4>
+        <h4>Payments (Admin Access Only)</h4>
         <div class="col-md-6">
             <Errormessage v-if="errorobj" :errorobj="errorobj"></Errormessage>
         </div>

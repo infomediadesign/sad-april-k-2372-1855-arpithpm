@@ -17,18 +17,18 @@
 
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-4">
-                <Errormessage v-if="errorobj" :errorobj="errorobj"></Errormessage>
-                <div v-if="pets.length < 1 && pets !== undefined">
-                    <b-alert :show="pets.length < 1 || pets === undefined" variant="danger">No Pets found. Add a new
-                        Pet.
-                    </b-alert>
-                    <hr>
+        <b-overlay :show="loading" rounded="sm" spinner-variant="primary">
+            <div class="row">
+                <div class="col-md-4">
+                    <Errormessage v-if="errorobj" :errorobj="errorobj"></Errormessage>
+                    <div v-if="pets.length < 1 && pets !== undefined">
+                        <b-alert :show="pets.length < 1 || pets === undefined" variant="danger">No Pets found. Add a new
+                            Pet.
+                        </b-alert>
+                        <hr>
+                    </div>
                 </div>
             </div>
-        </div>
-        <b-overlay :show="loading" rounded="sm">
             <div class="row">
                 <div class="col-md-5 pr-0" v-for="(pet,ind) in pets" :key="ind">
                     <b-card :header="titlize(pet.name)" class="my-1" border-variant="secondary">
@@ -69,7 +69,6 @@
             </div>
         </b-overlay>
 
-
     </div>
 
 </template>
@@ -90,7 +89,7 @@
                 pets: undefined,
                 // to display errormessage component
                 errorobj: undefined,
-                loading: false
+                loading: true
             }
         },
         props: {},

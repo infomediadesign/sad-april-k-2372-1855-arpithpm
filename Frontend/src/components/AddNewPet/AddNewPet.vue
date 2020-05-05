@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <Errormessage v-if="errorobj" :errorobj="errorobj"></Errormessage>
-                <b-overlay :show="breedlistdata.length < 1" rounded="sm">
+                <b-overlay :show="breedlistdata.length < 1 || loading" rounded="sm" spinner-variant="primary">
                     <b-card header="Pet Details">
                         <b-form v-if="show" @submit="onSubmit" @reset="onReset">
                             <div class="row">
@@ -102,7 +102,7 @@
                 loading: false
             }
         },
-        created() {
+        beforeCreate() {
             axios.get(petcategory)
                 .then(res => {
                     this.petcategoryOptions = res.data.map(item => {
@@ -136,7 +136,9 @@
                             this.$bvModal.msgBoxOk("Pet Details added.").then(() => {
                                 this.$router.push({name: "userpets"})
                             })
-                        }).then(() => this.loading = false)
+                        })
+                        .catch(err => this.errorobj = err.response.data)
+                        .then(() => this.loading = false)
                 } else {
                     this.errorobj = {"Date": "Select a valid Date."}
                 }
