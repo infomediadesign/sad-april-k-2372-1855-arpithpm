@@ -13,7 +13,9 @@
             <b-list-group-item>Check-in: {{booking.check_in_date}}</b-list-group-item>
             <b-list-group-item>Check-out: {{booking.check_out_date}}</b-list-group-item>
             <b-list-group-item>Booked On: {{booking.booked_on_date}}</b-list-group-item>
-            <b-list-group-item>Pet: {{booking.petobj.name}} ({{booking.petobj.breedobj.plan.name}})</b-list-group-item>
+            <b-list-group-item>Pet: {{booking.petobj ? booking.petobj.name : " No Data " }} ({{booking.petobj ?
+                booking.petobj.breedobj.plan.name : ""}})
+            </b-list-group-item>
             <b-list-group-item>Total Cost: {{booking.total_price}}</b-list-group-item>
             <b-list-group-item>Payment Method: {{booking.paymentobj.name}}</b-list-group-item>
             <b-list-group-item>Payment Satus: {{booking.paymentdone ? "Complete" : "Pending"}}</b-list-group-item>

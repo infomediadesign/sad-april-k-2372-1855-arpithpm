@@ -100,7 +100,7 @@ class AdminUserBookingsList(generics.ListAPIView):
 
 
 class AdminReceivePayment(generics.CreateAPIView):
-    # queryset = PaymentReceived.objects.all()
+    queryset = PaymentReceived.objects.all()
     serializer_class = PaymentReceivedSerializer
     permission_classes = [permissions.IsAdminUser]
 
@@ -110,10 +110,10 @@ class AdminReceivePayment(generics.CreateAPIView):
             amount = inst.validated_data["booking"].amount
             PaymentReceived.objects.create(booking=inst.validated_data["booking"], received_by=request.user,
                                            amount_received=amount)
-            resp = UserBookingsListSerializer(UserBooking.objects.all(), many=True)
+            # resp = UserBookingsListSerializer(UserBooking.objects.all(), many=True)
             # if resp.is_valid(raise_exception=True):
             # json = JSONRenderer().render(resp.data)
-            return Response(data=resp.data, status=201, content_type="text/json")
-            # return Response(data={"message": "Success."}, status=201)
+            # return Response(data=resp.data, status=201, content_type="text/json")
+            return Response(data={"message": "Success."}, status=201)
         else:
             return Response(data={"error": "Payment has already been received."}, status=403)

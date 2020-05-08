@@ -159,7 +159,9 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.FormParser',
         'rest_framework.parsers.MultiPartParser',
         'rest_framework.parsers.JSONParser',
-    ]
+    ],
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    # 'PAGE_SIZE': 100
 }
 
 AUTHENTICATION_BACKENDS = [
@@ -226,7 +228,6 @@ CORS_ALLOW_METHODS = [
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'Access-Control-Allow-Origin',
 ]
-
 
 sentry_sdk.init(
     dsn="https://e6207b66ed464af682e24d9ed0dec361@o385268.ingest.sentry.io/5217690",
