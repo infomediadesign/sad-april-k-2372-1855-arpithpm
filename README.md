@@ -39,3 +39,4 @@ Receive Payments, delete User Bookings, Modify User Bookings, Create Pricing Pla
  - User can login from frontend
  - User registration working from frontend
  - Users have different roles based on login
+ - Added Pagination - API supports Limit Offset Pagination for 1 page.
