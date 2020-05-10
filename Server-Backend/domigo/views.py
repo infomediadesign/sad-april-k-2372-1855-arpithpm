@@ -7,6 +7,7 @@ from .permissions import *
 from .serializers import *
 from .models import *
 from rest_framework.renderers import JSONRenderer
+from rest_framework.pagination import LimitOffsetPagination
 
 
 class PlanView(generics.ListAPIView):
@@ -97,6 +98,7 @@ class AdminUserBookingsList(generics.ListAPIView):
     queryset = UserBooking.objects.all()
     serializer_class = UserBookingsListSerializer
     permission_classes = [permissions.IsAdminUser]
+    pagination_class = LimitOffsetPagination
 
 
 class AdminReceivePayment(generics.CreateAPIView):
